@@ -1,12 +1,15 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
+#include "MainGameInstance.h"
+
 #include "Kismet/GameplayStatics.h"
 #include <assert.h> 
 
-#include "MainGameInstance.h"
-
 UMainGameInstance::UMainGameInstance() {
+	// Asume that the game starts at the menu
 	CurrentLevelIndex = 0;
+
+	LevelArray.Add(TEXT("Menu_Level")); // Hardcoded menu deal with it
 }
 
 void UMainGameInstance::ChangeCurrentLevel(FName LevelName, bool ResetPlayerData) {
