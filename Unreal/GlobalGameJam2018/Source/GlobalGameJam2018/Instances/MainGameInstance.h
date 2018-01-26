@@ -9,6 +9,20 @@
 /**
  * 
  */
+
+USTRUCT()
+struct FPlayerConnection 
+{
+	GENERATED_BODY()
+
+	UPROPERTY()
+	bool IsConnected;
+
+	UPROPERTY()
+	unsigned int PlayerId;
+
+};
+
 UCLASS()
 class GLOBALGAMEJAM2018_API UMainGameInstance : public UGameInstance
 {
@@ -19,6 +33,9 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 	TArray<FName> LevelArray;
+
+	UPROPERTY()
+	FPlayerConnection Players[4];
 
 private:
 	void SavePlayerData();
