@@ -4,13 +4,13 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/GameModeBase.h"
-#include "GlobalGameJam2018GameModeBase.generated.h"
+#include "MainGameMode.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class GLOBALGAMEJAM2018_API AGlobalGameJam2018GameModeBase : public AGameModeBase
+class GLOBALGAMEJAM2018_API AMainGameMode : public AGameModeBase
 {
 	GENERATED_BODY()
 	
