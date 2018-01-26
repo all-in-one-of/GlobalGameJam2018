@@ -53,6 +53,10 @@ void UMainGameInstance::ChangeCurrentLevelToNext() {
 
 }
 
+void UMainGameInstance::StartButtonPressed(unsigned int id) {
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 void UMainGameInstance::SavePlayerData() {
