@@ -1,11 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "MainGameInstance.h"
-
 #include "Kismet/GameplayStatics.h"
 #include <assert.h> 
 
-
+#include "MainGameInstance.h"
 
 UMainGameInstance::UMainGameInstance() {
 	CurrentLevelIndex = 0;
