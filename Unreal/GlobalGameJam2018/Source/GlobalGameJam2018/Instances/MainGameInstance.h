@@ -15,11 +15,22 @@ class GLOBALGAMEJAM2018_API UMainGameInstance : public UGameInstance
 	GENERATED_BODY()
 
 public:
+	UMainGameInstance();
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 	TArray<FName> LevelArray;
 
+private:
+	void SavePlayerData();
+	void LoadPlayerData();
+
+private:
+	unsigned int CurrentLevelIndex;
+
+public:
 	UFUNCTION(BlueprintCallable, Category = "Levels")
-	void ChangeCurrentLevel();
+	void ChangeCurrentLevel(FName LevelName, bool ResetPlayerData);
 	
-	
+	UFUNCTION(BlueprintCallable, Category = "Levels")
+	void ChangeCurrentLevelToNext();
 };
