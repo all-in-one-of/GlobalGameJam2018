@@ -37,6 +37,8 @@ public:
 	UPROPERTY()
 	FPlayerConnection Players[4];
 
+	void StartButtonPressed(unsigned int id);
+
 private:
 	void SavePlayerData();
 	void LoadPlayerData();
