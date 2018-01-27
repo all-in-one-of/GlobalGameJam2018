@@ -21,7 +21,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 	TArray<FName> LevelArray;
 	
-	bool IsPlayerConnected[4] {0};
+	TArray<bool> IsPlayerConnected = {0, 0, 0, 0};
 
 	void StartButtonPressed(unsigned int id);
 
