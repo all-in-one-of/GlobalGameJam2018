@@ -72,7 +72,7 @@ void UMainGameInstance::PlayerNextLevelPressed()
 	}
 
 	if (NumberOfPlayersConnected > 0)
-		ChangeCurrentLevelToNext();
+		ChangeCurrentLevel(TEXT("TestMapTim"), false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
