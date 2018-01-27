@@ -57,6 +57,10 @@ void UMainGameInstance::ChangeCurrentLevelToNext() {
 
 }
 
+//TArray<bool> UMainGameInstance::PlayerArray() {
+	//return IsPlayerConnected;
+//}
+
 void UMainGameInstance::StartButtonPressed(unsigned int id) {
 	IsPlayerConnected[id] = !IsPlayerConnected[id];
 }
