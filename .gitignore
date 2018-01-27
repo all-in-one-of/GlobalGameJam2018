@@ -74,3 +74,6 @@ Intermediate/
 # Cache files for the editor to use
 DerivedDataCache/*
 sh.exe.stackdump
+Houdini/Houdini Files/Feike/FBX/SMT_Pillar_Medium.fbx
+Unreal/GlobalGameJam2018/Content/Assets/Geometry/Environment/SM_Pillar_Medium.uasset
+Art/destructiblemeshes/DM_Pillar_Medium.apx
