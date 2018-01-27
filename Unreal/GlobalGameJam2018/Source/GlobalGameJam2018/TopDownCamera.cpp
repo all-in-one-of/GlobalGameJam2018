@@ -32,13 +32,16 @@ ATopDownCamera::ATopDownCamera()
 	TopDownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("TopDownCameraComponent"));
 	TopDownCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	TopDownCamera->bUsePawnControlRotation = false;
-	//TopDownCamera->SetRelativeLocation(offset);
-	//TopDownCamera->SetRelativeRotation(rotation);
+	TopDownCamera->SetRelativeLocation(offset);
+	TopDownCamera->SetRelativeRotation(rotation);
 }
 
 void ATopDownCamera::BeginPlay()
 {
 	Super::BeginPlay();
+
+	TopDownCamera->SetRelativeLocation(offset);
+	TopDownCamera->SetRelativeRotation(rotation);
 
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerCharacter::StaticClass(), foundActors);
@@ -52,9 +55,6 @@ void ATopDownCamera::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	CameraBoom->SocketOffset = offset;
-	CameraBoom->RelativeRotation = rotation;
-	CameraBoom->TargetArmLength = targetArmLength;
 }
 
 // Called to bind functionality to input
