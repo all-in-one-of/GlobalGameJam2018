@@ -17,15 +17,20 @@ ATopDownCamera::ATopDownCamera()
 	CameraBoom->bUsePawnControlRotation = false;
 	CameraBoom->bAutoActivate = true;
 	CameraBoom->TargetArmLength = targetArmLength;
+	//CameraBoom->SocketOffset = offset;
+	//CameraBoom->RelativeRotation = rotation;
 
 	GetCameraComponent()->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	GetCameraComponent()->bUsePawnControlRotation = false;
 	GetCameraComponent()->bAutoActivate = true;
+	//TopDownCamera->SetRelativeLocation(offset);
+	//TopDownCamera->SetRelativeRotation(rotation);
 }
 
 void ATopDownCamera::BeginPlay()
 {
 	Super::BeginPlay();
+
 }
 
 void ATopDownCamera::Tick(float DeltaTime)

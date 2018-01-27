@@ -45,12 +45,6 @@ public:
 	float targetArmLength;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float armMinLength;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
-	float armMaxLength;
-
-	UPROPERTY(BlueprintReadWrite, EditAnywhere)
 	FVector offset;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere)

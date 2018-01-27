@@ -8,7 +8,6 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "Kismet/GameplayStatics.h"
-#include "Kismet/KismetMathLibrary.h"
 #include "TopDownCamera.h"
 #include "Engine.h"
 
@@ -23,11 +22,11 @@ APlayerCharacter::APlayerCharacter()
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
+	bUseControllerRotationYaw = true;
 	bUseControllerRotationRoll = false;
 
 	// Configure character movement
-	GetCharacterMovement()->bOrientRotationToMovement = false; // Character moves in the direction of input...	
+	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 650.0f, 0.0f); // ...at this rotation rate
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
@@ -61,22 +60,13 @@ void APlayerCharacter::BeginPlay()
 
 void APlayerCharacter::TurnAtRate(float Rate)
 {
-	if ((Controller != NULL) && (Rate != AimDirection.X))
-	{
-	// 	if (GEngine)
-	//		GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Turn: ") + FString::FromInt(AimDirection.X*1000));
-		AimDirection.X = Rate;
-	}
+	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 }
 
 void APlayerCharacter::LookUpAtRate(float Rate)
 {
-	if ((Controller != NULL) && (Rate != AimDirection.Y))
-	{
-		/*if (GEngine)
-			GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Yellow, TEXT("Look: " + FString::FromInt(AimDirection.Y*1000)));*/
-		AimDirection.Y = Rate;
-	}
+	// calculate delta for this frame from the rate information
+	AddControllerPitchInput(Rate * BaseLookUpRate * GetWorld()->GetDeltaSeconds());
 }
 
 void APlayerCharacter::MoveForward(float Value)
@@ -125,21 +115,6 @@ void APlayerCharacter::SetupCameraReference() {
 	}
 
 }
-
-void APlayerCharacter::Tick(float DeltaTime)
-{
-	Super::Tick(DeltaTime);
-
-	if (!AimDirection.IsNearlyZero(MovementDeadZone)) {
-		FRotator AimRotation = FVector(AimDirection.X, AimDirection.Y, 0.f).Rotation();
-		FRotator CameraRotation = MainCamera->CameraBoom->GetComponentRotation();
-		FRotator YawRotation(0.f, CameraRotation.Yaw, 0.f);
-		FRotator NewRotation = UKismetMathLibrary::ComposeRotators(AimRotation, YawRotation);
-
-		SetActorRotation(AimRotation - YawRotation);
-	}
-}
-
 
 void APlayerCharacter::BindPull()
 {
