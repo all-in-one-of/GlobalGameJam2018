@@ -36,9 +36,15 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Set Pawn Id")
 	void SetId(int idp);
 
+	UFUNCTION(BlueprintCallable, Category = "Set Pawn Id")
+	bool GetEnabled() { return IsEnabled;  }
+
+public:
+	UPROPERTY(BlueprintReadWrite)
+	bool IsEnabled = false;
+
 private:
 	UMainGameInstance* GameInstance;
 
 	int Id = 0;
-	
 };
