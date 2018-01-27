@@ -31,6 +31,9 @@ public:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category=Camera)
 	float BaseLookUpRate;
 
+	UPROPERTY(EditAnywhere, Category = Movement)
+		float MovementDeadZone = 0.1f;
+
 	ATopDownCamera* MainCamera;
 
 protected:
@@ -54,8 +57,12 @@ public:
 	//Gets the camera reference and exits the game if no valid camera is setup
 	void SetupCameraReference();
 
+	virtual void Tick(float DeltaTime) override;
+
 	void BindPull();
 	void BindPush();
+	FVector AimDirection;
+
 
 	UFUNCTION(BlueprintImplementableEvent)
 	void PressPull();
