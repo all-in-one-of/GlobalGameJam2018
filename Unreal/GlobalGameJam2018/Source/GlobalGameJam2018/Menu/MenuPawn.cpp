@@ -4,26 +4,31 @@
 
 #include "Engine.h"
 
+#include <assert.h>
+
 
 // Sets default values
 AMenuPawn::AMenuPawn()
 {
  	// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
-	if (GEngine && GEngine->GetWorld())
-	{
-		UGameInstance* BasicGameInstance = Cast<UGameInstance>(GEngine->GetWorld()->GetGameInstance());
-
-		GameInstance = Cast<UMainGameInstance>(BasicGameInstance);
-	}
-
 }
 
 // Called when the game starts or when spawned
 void AMenuPawn::BeginPlay()
 {
 	Super::BeginPlay();
+
+	if (GetWorld())
+	{
+		UGameInstance* BasicGameInstance = Cast<UGameInstance>(GetWorld()->GetGameInstance());
+
+
+		GameInstance = Cast<UMainGameInstance>(BasicGameInstance);
+	}
+	else {
+		UE_LOG(LogTemp, Warning, TEXT("Not Called"));
+	}
 	
 }
 
@@ -41,6 +46,8 @@ void AMenuPawn::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 
 	InputComponent->BindAction("A_Button", IE_Pressed, this, &AMenuPawn::StartPressed);
 
+	InputComponent->BindAction("X_Button", IE_Pressed, this, &AMenuPawn::NextLevelPressed);
+
 }
 
 void AMenuPawn::SetId(int idp)
@@ -50,12 +57,14 @@ void AMenuPawn::SetId(int idp)
 
 void AMenuPawn::StartPressed()
 {
-	GameInstance->StartButtonPressed(Id);
+	if (GameInstance)
+		GameInstance->StartButtonPressed(Id);
 
 	IsEnabled = !IsEnabled;
 }
 
 void AMenuPawn::NextLevelPressed() 
 {
-	GameInstance->PlayerNextLevelPressed();
+	if (GameInstance)
+		GameInstance->PlayerNextLevelPressed();
 }

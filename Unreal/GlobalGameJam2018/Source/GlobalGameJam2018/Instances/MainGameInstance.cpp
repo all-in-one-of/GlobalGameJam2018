@@ -60,7 +60,7 @@ void UMainGameInstance::StartButtonPressed(unsigned int id) {
 
 void UMainGameInstance::PlayerNextLevelPressed() 
 {
-
+	ChangeCurrentLevel(TEXT("Test"), false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
