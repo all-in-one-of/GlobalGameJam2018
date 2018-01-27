@@ -21,6 +21,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 	TArray<FName> LevelArray;
 	
+	UPROPERTY(BlueprintReadOnly, Category = "Players")
 	TArray<bool> IsPlayerConnected = {0, 0, 0, 0};
 
 	void StartButtonPressed(unsigned int id);
