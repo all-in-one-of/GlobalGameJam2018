@@ -37,8 +37,8 @@ void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 {
 	// Set up gameplay key bindings
 	check(PlayerInputComponent);
-	PlayerInputComponent->BindAction("Push", IE_Pressed, this, &APlayerCharacter::PressPull);
-	PlayerInputComponent->BindAction("Pull", IE_Pressed, this, &APlayerCharacter::PressPush);
+	PlayerInputComponent->BindAction("Pull", IE_Pressed, this, &APlayerCharacter::BindPull);
+	PlayerInputComponent->BindAction("Push", IE_Pressed, this, &APlayerCharacter::BindPush);
 
 	PlayerInputComponent->BindAxis("MoveForward", this, &APlayerCharacter::MoveForward);
 	PlayerInputComponent->BindAxis("MoveRight", this, &APlayerCharacter::MoveRight);
@@ -114,4 +114,13 @@ void APlayerCharacter::SetupCameraReference() {
 		UKismetSystemLibrary::QuitGame(GetWorld(), GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit);
 	}
 
+}
+
+void APlayerCharacter::BindPull()
+{
+	PressPull();
+}
+void APlayerCharacter::BindPush() 
+{
+	PressPush();
 }

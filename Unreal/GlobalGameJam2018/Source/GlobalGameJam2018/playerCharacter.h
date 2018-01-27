@@ -54,6 +54,9 @@ public:
 	//Gets the camera reference and exits the game if no valid camera is setup
 	void SetupCameraReference();
 
+	void BindPull();
+	void BindPush();
+
 	UFUNCTION(BlueprintImplementableEvent)
 	void PressPull();
 
