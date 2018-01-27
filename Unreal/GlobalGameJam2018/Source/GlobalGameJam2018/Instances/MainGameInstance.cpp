@@ -54,6 +54,12 @@ void UMainGameInstance::ChangeCurrentLevelToNext() {
 }
 
 void UMainGameInstance::StartButtonPressed(unsigned int id) {
+	IsPlayerConnected[id] = !IsPlayerConnected[id];
+}
+
+
+void UMainGameInstance::PlayerNextLevelPressed() 
+{
 
 }
 

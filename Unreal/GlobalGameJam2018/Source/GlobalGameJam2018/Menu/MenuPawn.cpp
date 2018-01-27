@@ -51,5 +51,11 @@ void AMenuPawn::SetId(int idp)
 void AMenuPawn::StartPressed()
 {
 	GameInstance->StartButtonPressed(Id);
+
+	IsEnabled = !IsEnabled;
 }
 
+void AMenuPawn::NextLevelPressed() 
+{
+	GameInstance->PlayerNextLevelPressed();
+}
