@@ -20,31 +20,33 @@ class GLOBALGAMEJAM2018_API ATopDownCamera : public ACameraActor
 public:
 	ATopDownCamera();
 
-	UFUNCTION(BlueprintCallable)
-	void Zoom();
-	UFUNCTION(BlueprintCallable)
-	void Move();
-	UFUNCTION(BlueprintCallable)
-	float GetGreatestDistance();
-	UFUNCTION(BlueprintCallable)
-	FVector GetCenter();
+protected:
+	// Called when the game starts or when spawned
+	virtual void BeginPlay() override;
 
-	virtual void Tick( float DeltaTime ) override;
+public:
+	// Called every frame
+	virtual void Tick(float DeltaSeconds) override;
+
+	// Camera boom positioning the camera beside the character
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* CameraBoom;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TArray<APlayerCharacter*> playerReferences;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	FVector offset;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	float smoothTime = 0.5f;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	float minZoom = 38.0f;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	float maxZoom = 10.0f;
-	UPROPERTY(BlueprintReadOnly, EditAnywhere)
-	float zoomCorrection = 5.0f;
 
-private:
-	float deltaTime = 0.016f;
-	FBoxSphereBounds bounds;
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TArray<FVector> playerLocations;
+
+	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
+	TArray<float> distances;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	float targetArmLength;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FVector offset;
+
+	UPROPERTY(BlueprintReadWrite, EditAnywhere)
+	FRotator rotation;
 };
