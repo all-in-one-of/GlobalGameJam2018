@@ -23,12 +23,12 @@ APlayerCharacter::APlayerCharacter()
 
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = true;
+	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
 
 	// Configure character movement
 	GetCharacterMovement()->bOrientRotationToMovement = true; // Character moves in the direction of input...	
-	GetCharacterMovement()->RotationRate = FRotator(0.0f, 650.f, 0.0f); // ...at this rotation rate
+	GetCharacterMovement()->RotationRate = FRotator(0.0f, 0.0f, 0.0f); // ...at this rotation rate
 	GetCharacterMovement()->JumpZVelocity = 600.f;
 	GetCharacterMovement()->AirControl = 0.2f;
 
@@ -95,23 +95,23 @@ void APlayerCharacter::TouchStopped(ETouchIndex::Type FingerIndex, FVector Locat
 void APlayerCharacter::TurnAtRate(float Rate)
 {
 	// calculate delta for this frame from the rate information
-	AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
+	//AddControllerYawInput(Rate * BaseTurnRate * GetWorld()->GetDeltaSeconds());
 	//const FRotator YawRotation(0, 0, 0);
 
 	//// get forward vector
 	//const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 	//AddMovementInput(Direction, 1.f);
-	//if ((Controller != NULL) && (Rate != 0.0f))
-	//{
-	//	// find out which way is forward
-	//	const FRotator Rotation = Controller->GetControlRotation();
-	//	const FRotator YawRotation(0, Rotation.Yaw + Rate, 0);
+	if ((Controller != NULL) && (Rate != 0.0f))
+	{
+		// find out which way is forward
+		const FRotator Rotation = Controller->GetControlRotation();
+		const FRotator YawRotation(0, Rotation.Yaw + Rate, 0);
 
-	//	// get forward vector
-	//	//const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	//	SetActorRotation(YawRotation);
-	//	
-	//}
+		// get forward vector
+		//const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
+		SetActorRotation(YawRotation);
+		
+	}
 }
 
 void APlayerCharacter::LookUpAtRate(float Rate)
