@@ -81,8 +81,15 @@ void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 void APlayerCharacter::BeginPlay()
 {
 	Super::BeginPlay();
-//	TArray<AActor*> FoundCamera;
-//	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATopDownCamera::StaticClass(), FoundCamera);
+	TArray<AActor*> FoundCamera;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATopDownCamera::StaticClass(), FoundCamera);
+	if (FoundCamera.Num() == 1) 
+		MainCamera = Cast<ATopDownCamera>(FoundCamera[0]);
+
+	if (!MainCamera) 
+		UKismetSystemLibrary::QuitGame(GetWorld(), GetWorld()->GetFirstPlayerController(), EQuitPreference::Quit);
+
+	
 }
 
 
@@ -134,9 +141,8 @@ void APlayerCharacter::MoveForward(float Value)
 	if ((Controller != NULL) && (Value != 0.0f))
 	{
 		// find out which way is forward
-		const FRotator Rotation = Controller->GetControlRotation();
-		const FRotator YawRotation(0, Rotation.Yaw, 0);
-
+		FRotator Rotation = MainCamera->CameraBoom->GetComponentRotation();
+		FRotator YawRotation(0, Rotation.Yaw, 0);
 		// get forward vector
 		const FVector Direction = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
 		AddMovementInput(Direction, Value);
@@ -148,7 +154,7 @@ void APlayerCharacter::MoveRight(float Value)
 	if ( (Controller != NULL) && (Value != 0.0f) )
 	{
 		// find out which way is right
-		const FRotator Rotation = Controller->GetControlRotation();
+		FRotator Rotation = MainCamera->CameraBoom->GetComponentRotation();
 		const FRotator YawRotation(0, Rotation.Yaw, 0);
 	
 		// get right vector 

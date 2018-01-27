@@ -6,6 +6,8 @@
 #include "GameFramework/Character.h"
 #include "playerCharacter.generated.h"
 
+class ATopDownCamera;
+
 UCLASS(config=Game)
 class APlayerCharacter : public ACharacter
 {
@@ -64,7 +66,7 @@ protected:
 	// End of APawn interface
 
 	virtual void BeginPlay() override;
-	AActor* MainCamera;
+	ATopDownCamera* MainCamera;
 
 public:
 	///** Returns CameraBoom subobject **/
