@@ -22,7 +22,7 @@ public:
 	TArray<FName> LevelArray;
 	
 	UPROPERTY(BlueprintReadOnly, Category = "Players")
-	TArray<bool> IsPlayerConnected = {1, 1, 0, 0};
+	TArray<bool> IsPlayerConnected = {0, 0, 0, 0};
 
 	void StartButtonPressed(unsigned int id);
 
