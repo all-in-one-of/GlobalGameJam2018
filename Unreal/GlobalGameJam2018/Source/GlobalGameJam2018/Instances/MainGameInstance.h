@@ -41,7 +41,4 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Levels")
 	void ChangeCurrentLevelToNext();
-
-	//UPROPERTY(BlueprintCallable, Category = "Players")
-	//TArray<bool> PlayerArray();
 };
