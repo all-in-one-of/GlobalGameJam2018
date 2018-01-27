@@ -63,8 +63,8 @@ protected:
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	// End of APawn interface
 
-	//void BeginPlay() override;
-	//AActor* MainCamera;
+	virtual void BeginPlay() override;
+	AActor* MainCamera;
 
 public:
 	///** Returns CameraBoom subobject **/

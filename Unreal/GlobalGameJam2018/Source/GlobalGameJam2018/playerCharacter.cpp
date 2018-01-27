@@ -8,8 +8,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
-//#include "Kismet/GameplayStatics.h"
-//#include "TopDownCamera.h"
+#include "Kismet/GameplayStatics.h"
+#include "TopDownCamera.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AthirdpersontemplateCharacter
@@ -78,11 +78,12 @@ void APlayerCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	//PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AthirdpersontemplateCharacter::OnResetVR);
 }
 
-//void APlayerCharacter::BeginPlay()
-//{
+void APlayerCharacter::BeginPlay()
+{
+	Super::BeginPlay();
 //	TArray<AActor*> FoundCamera;
 //	UGameplayStatics::GetAllActorsOfClass(GetWorld(), ATopDownCamera::StaticClass(), FoundCamera);
-//}
+}
 
 
 //void AthirdpersontemplateCharacter::OnResetVR()
