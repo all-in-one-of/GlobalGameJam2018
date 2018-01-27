@@ -10,38 +10,29 @@ ATopDownCamera::ATopDownCamera()
 {
 	PrimaryActorTick.bCanEverTick = true;
 
-	AutoPossessPlayer = EAutoReceiveInput::Player0;
-	
-	// Disable controller rotation
-	bUseControllerRotationPitch = false;
-	bUseControllerRotationYaw = false;
-	bUseControllerRotationRoll = false;
-
-	// Create a dummy root component we can attach things to.
-	RootComponent = CreateDefaultSubobject<USceneComponent>(TEXT("RootComponent"));
-
 	// Attach our camera and visible object to our root component. Offset and rotate the camera.
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
 	CameraBoom->AttachTo(RootComponent);
 	CameraBoom->bAbsoluteRotation = true;
 	CameraBoom->bUsePawnControlRotation = false;
+	CameraBoom->bAutoActivate = true;
 	CameraBoom->TargetArmLength = targetArmLength;
 	//CameraBoom->SocketOffset = offset;
 	//CameraBoom->RelativeRotation = rotation;
 
-	TopDownCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("TopDownCameraComponent"));
-	TopDownCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
-	TopDownCamera->bUsePawnControlRotation = false;
-	TopDownCamera->SetRelativeLocation(offset);
-	TopDownCamera->SetRelativeRotation(rotation);
+	GetCameraComponent()->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
+	GetCameraComponent()->bUsePawnControlRotation = false;
+	GetCameraComponent()->bAutoActivate = true;
+	//TopDownCamera->SetRelativeLocation(offset);
+	//TopDownCamera->SetRelativeRotation(rotation);
 }
 
 void ATopDownCamera::BeginPlay()
 {
 	Super::BeginPlay();
 
-	TopDownCamera->SetRelativeLocation(offset);
-	TopDownCamera->SetRelativeRotation(rotation);
+	CameraBoom->SetRelativeLocation(offset);
+	CameraBoom->SetRelativeRotation(rotation);
 
 	TArray<AActor*> foundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerCharacter::StaticClass(), foundActors);
@@ -54,12 +45,5 @@ void ATopDownCamera::BeginPlay()
 void ATopDownCamera::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
-}
-
-// Called to bind functionality to input
-void ATopDownCamera::SetupPlayerInputComponent(class UInputComponent* InputComponent)
-{
-	Super::SetupPlayerInputComponent(InputComponent);
 
 }
