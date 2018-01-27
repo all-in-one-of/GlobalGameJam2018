@@ -17,7 +17,9 @@ void UMainGameInstance::ChangeCurrentLevel(FName LevelName, bool ResetPlayerData
 
 	for (int i = 0; i < LevelArray.Num(); i++) {
 		if (LevelArray[i] == LevelName) {
-			CurrentLevelIndex = 0;
+			CurrentLevelIndex = i;
+
+			UE_LOG(LogTemp, Warning, TEXT("Level changed to %i "), i);
 		}
 	}
 
@@ -28,6 +30,8 @@ void UMainGameInstance::ChangeCurrentLevel(FName LevelName, bool ResetPlayerData
 
 	if (!ResetPlayerData)
 		LoadPlayerData();
+
+	
 
 }
 
@@ -60,7 +64,15 @@ void UMainGameInstance::StartButtonPressed(unsigned int id) {
 
 void UMainGameInstance::PlayerNextLevelPressed() 
 {
-	ChangeCurrentLevel(TEXT("Test"), false);
+	int NumberOfPlayersConnected = 0;
+
+	for (int i = 0; i < 4; i++) {
+		if (IsPlayerConnected[i])
+			NumberOfPlayersConnected++;
+	}
+
+	if (NumberOfPlayersConnected > 0)
+		ChangeCurrentLevel(TEXT("TestMapTim"), false);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////
