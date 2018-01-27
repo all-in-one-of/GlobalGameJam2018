@@ -25,6 +25,10 @@ ATopDownCamera::ATopDownCamera()
 	GetCameraComponent()->bAutoActivate = true;
 	//TopDownCamera->SetRelativeLocation(offset);
 	//TopDownCamera->SetRelativeRotation(rotation);
+
+	armMinLength = 250;
+
+	armMinLength = 750;
 }
 
 void ATopDownCamera::BeginPlay()
