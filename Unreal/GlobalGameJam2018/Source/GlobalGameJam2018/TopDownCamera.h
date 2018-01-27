@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "GameFramework/Pawn.h"
+#include "Camera/CameraActor.h"
 #include "TopDownCamera.generated.h"
 
 /**
@@ -13,7 +13,7 @@
 class APlayerCharacter;
 
 UCLASS()
-class GLOBALGAMEJAM2018_API ATopDownCamera : public APawn
+class GLOBALGAMEJAM2018_API ATopDownCamera : public ACameraActor
 {
 	GENERATED_BODY()
 	
@@ -28,15 +28,9 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaSeconds) override;
 
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
-
 	// Camera boom positioning the camera beside the character
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class USpringArmComponent* CameraBoom;
-
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* TopDownCamera;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere)
 	TArray<APlayerCharacter*> playerReferences;
