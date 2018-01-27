@@ -57,6 +57,12 @@ void UMainGameInstance::StartButtonPressed(unsigned int id) {
 	IsPlayerConnected[id] = !IsPlayerConnected[id];
 }
 
+
+void UMainGameInstance::PlayerNextLevelPressed() 
+{
+
+}
+
 ///////////////////////////////////////////////////////////////////////////////////////////
 
 void UMainGameInstance::SavePlayerData() {

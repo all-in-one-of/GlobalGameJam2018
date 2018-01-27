@@ -33,6 +33,8 @@ public:
 public:
 	void StartPressed();
 
+	void NextLevelPressed();
+
 	UFUNCTION(BlueprintCallable, Category = "Set Pawn Id")
 	void SetId(int idp);
 

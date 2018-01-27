@@ -55,3 +55,7 @@ void AMenuPawn::StartPressed()
 	IsEnabled = !IsEnabled;
 }
 
+void AMenuPawn::NextLevelPressed() 
+{
+	GameInstance->PlayerNextLevelPressed();
+}

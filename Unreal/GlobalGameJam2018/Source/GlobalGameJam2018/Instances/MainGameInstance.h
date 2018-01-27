@@ -20,11 +20,12 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Levels")
 	TArray<FName> LevelArray;
-
-	UPROPERTY()
+	
 	bool IsPlayerConnected[4] {0};
 
 	void StartButtonPressed(unsigned int id);
+
+	void PlayerNextLevelPressed();
 
 private:
 	void SavePlayerData();
