@@ -31,19 +31,20 @@ void ATopDownCamera::BeginPlay()
 {
 	Super::BeginPlay();
 
-	CameraBoom->SetRelativeLocation(offset);
-	CameraBoom->SetRelativeRotation(rotation);
-
-	TArray<AActor*> foundActors;
-	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerCharacter::StaticClass(), foundActors);
-	for (int i = 0; i < foundActors.Num(); i++)
-	{
-		playerReferences.Add(Cast<APlayerCharacter>(foundActors[i]));
-	}
 }
 
 void ATopDownCamera::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	CameraBoom->SetRelativeLocation(offset);
+	CameraBoom->SetRelativeRotation(rotation);
+
+	TArray<AActor*> foundActors;
+	playerReferences.Empty();
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), APlayerCharacter::StaticClass(), foundActors);
+	for (int i = 0; i < foundActors.Num(); i++)
+	{
+		playerReferences.Add(Cast<APlayerCharacter>(foundActors[i]));
+	}
 }
